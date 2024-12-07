@@ -23,9 +23,3 @@ jobs:
       run: |
         mvn clean compile
         mvn test
-
-    - name: Compile Java Code
-      run: javac Feature2.java
-
-    - name: Run Java Code
-      run: java Feature2
