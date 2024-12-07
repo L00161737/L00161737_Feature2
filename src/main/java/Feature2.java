@@ -14,3 +14,4 @@ public class Feature2 {
         System.out.println("Feature under development...");
     }
 }
+// Triggering GitHub Actions
