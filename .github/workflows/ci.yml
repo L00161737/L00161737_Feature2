@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI with Maven
 
 on:
   push:
@@ -18,6 +18,11 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
+
+    - name: Build and Test with Maven
+      run: |
+        mvn clean compile
+        mvn test
 
     - name: Compile Java Code
       run: javac Feature2.java
