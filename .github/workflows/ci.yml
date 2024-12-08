@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI
 
 on:
   push:
@@ -13,17 +13,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up JDK 17
+    # Step 2: Set up Java JDK
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Build with Maven
-      run: mvn clean install
+    # Step 3: Cache Maven dependencies to speed up builds
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven
 
-    - name: Run tests
-      run: mvn test
+    # Step 4: Build and run tests with Maven
+    - name: Build and Test with Maven
+      run: mvn clean verify
+
+    # Step 5: Generate JaCoCo report
+    - name: Generate Code Coverage Report
+      run: mvn jacoco:report
+
+    # Step 6: Generate Javadoc
+    - name: Generate Javadoc
+      run: mvn javadoc:javadoc
+
+    # Step 7: Upload coverage and Javadoc reports as artifacts
+    - name: Upload Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: Reports
+        path: |
+          target/site/jacoco/
+          target/site/apidocs/
