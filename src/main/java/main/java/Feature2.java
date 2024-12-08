@@ -1,37 +1,32 @@
 package main.java;
 
-
 /**
- * This class provides functionality for managing Bokoblin camp entry points.
+ * Represents the Bokoblin Camp Entry Points feature.
+ * This feature helps identify entry points to Bokoblin camps
+ * and lists the available camps for resource collection.
  */
 public class Feature2 {
 
     /**
-     * Returns a list of available Bokoblin camps.
+     * Retrieves the names of available camps.
      *
-     * @return an array of camp names
+     * @return an array of strings containing the names of the camps
      */
     public String[] getCamps() {
-        // Returning the list of camps
-        return new String[] {"North Camp", "South Camp", "East Camp", "West Camp"};
+        return new String[] { "North Camp", "South Camp", "East Camp", "West Camp" };
     }
 
     /**
-     * Main method to execute the program.
+     * Main method for demonstrating the feature.
      *
-     * @param args command-line arguments
+     * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
-        System.out.println("Welcome to the Bokoblin Camp Entry Points Feature!");
         Feature2 feature = new Feature2();
-
-        // Displaying the list of camps
+        System.out.println("Welcome to the Bokoblin Camp Entry Points Feature!");
         System.out.println("Available Camps:");
         for (String camp : feature.getCamps()) {
             System.out.println("- " + camp);
         }
     }
 }
-
-
-// Triggering GitHub Actions
